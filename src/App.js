@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import "./main.css"
+import About from './componetns/About';
+import Navbar from './componetns/Navbar';
+import Pricing from './componetns/Pricing';
+import Home from './componetns/Home';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useState, useEffect } from "react";
+import Pixel from './componetns/Pixel';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+const App = () => {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
+  let component
+  switch(window.location.pathname){
+  case "/":
+    component = <Home />
+    break
+    case "/about":
+      component = <About />
+      break
+      case "/pricing":
+        component = <Pricing />
+        break
+        case "/pricing/pixel":
+          component = <Pixel />
+          break
+    }
+  return(
+    <>
+      <Navbar />
+      {component}
+    </>
+  )
 }
 
 export default App;
+
+
+
+
+
+
